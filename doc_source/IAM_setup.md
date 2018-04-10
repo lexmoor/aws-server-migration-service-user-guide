@@ -2,7 +2,26 @@
 
 The following prerequisite applies to either platform supported by AWS SMS\.
 
-**To create an IAM user in your AWS account**
+If your IAM user account, group, or role is assigned administator permissions, then you have access to SMS. To call the AWS SMS API with the credentials of an IAM user that does not have administrative access to your AWS account, create a custom inline policy defined by the following JSON code and apply it to the IAM user: 
+
+```
+{
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "sms:*"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
+```
+
+For information about managing IAM users and permissions, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\.
+
+**Create a new IAM user in your AWS account for each connector**
 
 1. Create a new IAM user for your connector to communicate with AWS\. Save the generated access key and secret key for use during the initial connector setup\. For information about managing IAM users and permissions, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\.
 
@@ -85,22 +104,3 @@ Use the following option in AWS regions that do not make an IAM role template av
 
 **Note**  
 Your AWS CLI user must have permissions on IAM\. You can grant these by attaching the `IAMFullAccess` managed policy to your AWS CLI user\. For information about managing IAM users and permissions, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\. 
-
-To call the AWS SMS API with the credentials of an IAM user that does not have administrative access to your AWS account, create a custom inline policy defined by the following JSON code and apply it to the IAM user:
-
-```
-{
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "sms:*"
-                ],
-                "Resource": "*"
-            }
-        ]
-    }
-```
-
-For information about managing IAM users and permissions, see [Creating an IAM User in Your AWS Account](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html)\.
